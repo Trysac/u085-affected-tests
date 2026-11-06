@@ -1,21 +1,30 @@
-"""Select the Python test files affected by changed files using a static ast import graph, with conservative run-all triggers"""
+"""Select the Python test files affected by changed files.
+
+``build_graph`` parses a project with :func:`ast.parse` and builds a static import graph;
+``affected_tests`` walks it backwards from the changed files and returns the test files that can
+be affected, falling back to "run everything" whenever it cannot be sure.
+
+Safety: project code is only ever parsed with ``ast.parse``; it is never imported, compiled or
+executed. Files larger than ``max_file_bytes`` are skipped with a warning, the number of files,
+changed paths and warnings is capped, and ``RecursionError`` / ``MemoryError`` raised while
+parsing a single file are caught and reported as warnings. ``GitDiffSource`` validates the base
+ref, never uses a shell and runs git with a timeout.
+"""
 
 from __future__ import annotations
 
-__all__ = ["__version__", "normalize"]
+from ._core import AffectedResult, ImportGraph, affected_tests, build_graph
+from ._errors import AffectedTestsError
+from ._git import GitDiffSource
+
+__all__ = [
+    "AffectedResult",
+    "AffectedTestsError",
+    "GitDiffSource",
+    "ImportGraph",
+    "__version__",
+    "affected_tests",
+    "build_graph",
+]
 
 __version__ = "0.1.0"
-
-
-def normalize(value: str) -> str:
-    """Return ``value`` trimmed and lower-cased.
-
-    Placeholder API created by the template: replace it with the utility's real behavior.
-
-    Raises:
-        ValueError: if ``value`` is empty or only whitespace.
-    """
-    cleaned = value.strip()
-    if not cleaned:
-        raise ValueError("value must not be empty")
-    return cleaned.lower()

@@ -1,16 +1,15 @@
 # affected-tests
 
-> Select the Python test files affected by changed files using a static ast import graph, with conservative run-all triggers Python package `trysac-affected-tests`, import name `affected_tests`, MIT licensed,
-> Python >= 3.10, no runtime dependencies.
+> Select the Python test files affected by changed files using a static ast import graph, with conservative run-all triggers. Python package `trysac-affected-tests`, import name `affected_tests`, MIT licensed, Python >= 3.10, no runtime dependencies.
 
 ## Docs
 
-- [README](README.md): problem, install, usage example
-- [AGENTS](AGENTS.md): commands, folder map, conventions, limits
-- [Architecture](docs/ARCHITECTURE.md): shape of the package and its public API
-- [Testing](docs/TESTING.md): how to run and extend the tests
+- [README](README.md): problem, install, usage example, public API, limits
+- [Architecture](docs/ARCHITECTURE.md): shape of the package and its decisions
+- [Testing](docs/TESTING.md): how to run the tests and what they cover
+- [Security](docs/SECURITY.md): threat model with defended and undefended risks
 
 ## Optional
 
+- [Project](docs/PROJECT.md): objective, scope, out of scope
 - [Stack](docs/STACK.md): tools used and discarded
-- [Changelog](CHANGELOG.md): release history

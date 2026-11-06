@@ -19,6 +19,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+affected-tests = "affected_tests.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/Trysac/u085-affected-tests"
 Source = "https://github.com/Trysac/u085-affected-tests"
