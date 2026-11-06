@@ -9,4 +9,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added static import-graph test selection: `build_graph`, `affected_tests`, `GitDiffSource` and the `python -m affected_tests` CLI with conservative run-all triggers.
 - Initial project structure from the factory utility template.

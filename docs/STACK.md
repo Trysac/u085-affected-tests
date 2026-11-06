@@ -4,20 +4,14 @@
 
 | Tool | Why |
 |---|---|
-| Python >= 3.10 | Widest supported range that still allows modern typing syntax. |
-| uv | Fast, reproducible environments and builds on Windows and Linux. |
-| hatchling | Simple, standards-based build backend; no setup.py. |
-| ruff | Lint and format in one fast tool. |
-| mypy (strict) | Catches type errors before release; the package ships `py.typed`. |
-| pytest + pytest-cov | De facto standard test runner with branch coverage. |
-| gitleaks | Secret scanning locally and in CI. |
-| GitHub Actions + Dependabot | Thin CI wrapper over the local gates; weekly dependency updates. |
+| Python >= 3.10 | Minimum version declared for the package; the code uses `from __future__ import annotations` and `str.removeprefix`. |
+| Python standard library only | `ast`, `os`, `posixpath`, `re`, `subprocess`, `pathlib`, `collections`, `dataclasses`, `functools`, `logging`, `argparse`, `json`. No third-party imports exist in `src/affected_tests`. |
+| `typing.Literal` | Types the `code` of `AffectedTestsError`. |
 
 ## Discarded
 
 | Tool | Why not |
 |---|---|
-| Poetry | Slower, and uv covers the same needs with standard dependency groups. |
-| black + isort + flake8 | Replaced by ruff: one tool instead of three. |
-| tox / nox | The OS matrix lives in CI; locally a single `scripts/check.py` is enough. |
-| Shell scripts for gates | Not portable to Windows; the gates are a stdlib Python script. |
+| pytest-testmon | Needs a coverage database from a previous run; this tool is stateless. See the README. |
+| Importing project modules to discover imports | Would execute project code. Module discovery uses `ast.parse` only. |
+| A shell for git | Git is started with an argument list and `shell=False`, so the base ref cannot inject shell syntax. |
